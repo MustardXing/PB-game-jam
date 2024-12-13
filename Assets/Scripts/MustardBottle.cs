@@ -8,9 +8,11 @@ using UnityEngine.Experimental.Animations;
 public class MustardBottle : MonoBehaviour
 {
     public TMP_Text mustardText;
-    public Animator IdolAnimation;
+    public Animator animator;
     //if not using TMP, make line 8 public Text mustard;
-    private int MustardCounter;
+    public int MustardCounter;
+    public int Multiplier = 1;
+    public int multiplierCost;
     // start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,21 @@ public class MustardBottle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        mustardText.text = "MUSTARD: " + MustardCounter;
+
     }
 
     public void Addmustard()
     {
-        Animator.Play(IdolAnimation);
-        MustardCounter++;
-        mustardText.text = "MUSTARD: " + MustardCounter;
+        animator.Play("clickAnimation");
+        MustardCounter += 1 * Multiplier ;
+
+    }
+
+    public void ClickMultiplier()
+    {
+        MustardCounter -= multiplierCost;
+        multiplierCost = multiplierCost * 2;
+        Multiplier += 1;
     }
 }
